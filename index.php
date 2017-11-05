@@ -50,8 +50,8 @@
  function htmlTable($head,$rows) {
      $htmlTable = NULL;
      $htmlTable .= "<table border = 2>";
-     foreach ($head as $row) {
-         $htmlTable .= "<th>$head</th>";
+     foreach ($head as $head1) {
+         $htmlTable .= "<th>$head1</th>";
      }
      foreach ($rows as $row) {
          $htmlTable .= "<tr>";
