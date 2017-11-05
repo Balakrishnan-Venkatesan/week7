@@ -10,7 +10,7 @@
     echo "Connected successfully <br><br>";
     $query = 'SELECT * FROM accounts WHERE `id` < 6';
     $rows = runQuery($query);
-    echo count($rows) . ' records have id < 6 <br><br>';
+    echo count($rows) . ' records have user ID less than 6 in "accounts" table <br><br>';
     $header = 'SHOW COLUMNS FROM accounts';
     $head = tableHead($header);
     echo htmlTable($head,$rows);
