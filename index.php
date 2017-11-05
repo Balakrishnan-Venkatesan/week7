@@ -12,8 +12,8 @@
     $rows = runQuery($query);
     echo count($rows) . ' records have id < 6 <br>';
     $header = 'SHOW COLUMNS FROM accounts';
-    $head = runQuery($header);
-    echo table($head,$rows);
+    $head = tableHead($header);
+    echo htmlTable($head,$rows);
  }
  catch(PDOException $e) {
     http_error("500 Internal Server Error\n\n" . "Error in connecting to the DB:\n\n" . $e->getMessage() . "<br>");
@@ -32,5 +32,36 @@
         http_error("500 Internal Server Error\n\n" . "Error in connecting to the DB:\n\n" . $e->getMessage() . "<br>");
     }
  }
+
+ function tableHead($query){
+    global $connect;
+    try {
+        $sql = $connect->prepare($query);
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_COLUMN);
+        $sql->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e) {
+        http_error("500 Internal Server Error\n\n" . "Error in connecting to the DB:\n\n" . $e->getMessage() . "<br>");
+    }
+ }
+
+function htmlTable($head,$rows) {
+    $htmlTable = NULL;
+    $htmlTable .= "<table border = 2>";
+    foreach ($head as $row) {
+        $htmlTable .= "<th>$head</th>";
+    }
+    foreach ($rows as $row) {
+      $htmlTable .= "<tr>";
+       foreach ($row as $column) {
+         $htmlTable .= "<td>$column</td>";
+       }
+      $htmlTable .= "</tr>";
+    }
+    $htmlTable .= "</table>";
+    return $htmlTable;
+}
 
 ?>
