@@ -7,10 +7,10 @@
 
  try {
      $connect = new PDO("mysql:host=$hostname;dbname=bv98",$username,$password);
-     echo "Connected successfully <br>";
+     echo "Connected successfully. <br><br>";
      $query = 'SELECT * FROM accounts WHERE `id` < 6';
      $rows = runQuery($query);
-     echo count($rows) . ' records have id < 6 <br>';
+     echo count($rows) . ' records have user ID than 6 in the "accounts" table. <br><br>';
      $header = 'SHOW COLUMNS FROM accounts';
      $head = tableHead($header);
      echo htmlTable($head,$rows);
